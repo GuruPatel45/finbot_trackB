@@ -30,7 +30,7 @@ import numpy as np
 from langchain_core.tools import tool
 
 from backend.database.cache import cache_get, cache_set
-from config import settings, indian_market
+from backend.config import settings, indian_market
 
 logger = logging.getLogger(__name__)
 

@@ -25,7 +25,7 @@ from fastapi.responses import StreamingResponse, JSONResponse
 from pydantic import BaseModel, field_validator
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from config import settings
+from backend.config import settings
 from backend.database.models import create_db_engine, init_db, get_session_factory, Portfolio, Holding, Watchlist, Alert, ResearchQuery
 from backend.database.cache import init_redis, cache_get, cache_set, get_cache_status
 

@@ -46,7 +46,7 @@ import pytz
 
 from backend.tools.financial_tools import ALL_TOOLS
 from backend.tools.sentiment_tools import SENTIMENT_TOOLS
-from config import settings, indian_market
+from backend.config import settings, indian_market
 
 logger = logging.getLogger(__name__)
 
