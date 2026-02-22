@@ -59,3 +59,5 @@ pytest
 pytest-asyncio
 httpx
 flake8
+
+scipy
