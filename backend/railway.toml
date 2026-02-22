@@ -1,0 +1,25 @@
+# ============================================================
+# Railway/Render Deployment — Backend
+# ============================================================
+# railway.toml (place in backend/)
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "uvicorn api.main:app --host 0.0.0.0 --port $PORT"
+healthcheckPath = "/api/health"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 3
+
+# ── Environment Variables to set on Railway ────────────────
+# GROQ_API_KEY=gsk_xxx
+# DATABASE_URL=postgresql+asyncpg://... (auto from Railway Postgres)
+# REDIS_URL=redis://... (auto from Railway Redis)
+# NEWS_API_KEY=xxx
+# ALPHA_VANTAGE_KEY=xxx
+# LANGCHAIN_TRACING_V2=true
+# LANGCHAIN_API_KEY=ls__xxx
+# LANGCHAIN_PROJECT=finbot-prod
+# ALLOWED_ORIGINS=https://your-app.vercel.app
+# APP_ENV=production

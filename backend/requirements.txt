@@ -1,0 +1,61 @@
+# ── LangChain & LangGraph ──
+langchain
+langchain-community
+langchain-groq
+langchain-openai
+langchain-anthropic
+langgraph
+langsmith
+
+# ── FastAPI ──
+fastapi
+uvicorn[standard]
+python-multipart
+httpx
+aiohttp
+asyncio-throttle
+websockets
+sse-starlette
+
+# ── Financial Data ──
+yfinance
+pandas
+numpy
+scipy
+requests
+
+# ── Sentiment (Lightweight Only) ──
+vaderSentiment
+textblob
+
+# ── Database ──
+sqlalchemy
+asyncpg
+psycopg2-binary
+alembic
+redis
+
+# ── Security ──
+python-jose[cryptography]
+passlib[bcrypt]
+python-dotenv
+
+# ── Utilities ──
+pydantic
+pydantic-settings
+loguru
+tenacity
+cachetools
+pytz
+schedule
+
+# ── Monitoring ──
+prometheus-client
+
+# ── PDF ──
+reportlab
+
+pytest
+pytest-asyncio
+httpx
+flake8
