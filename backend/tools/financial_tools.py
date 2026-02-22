@@ -86,8 +86,8 @@ def is_market_open() -> bool:
 # TOOL 1: Real-time Stock Price (Yahoo Finance primary)
 # ═══════════════════════════════════════════════════════════
 
-@tool
-def get_stock_price(symbol: str) -> str:
+def fetch_stock_price(symbol: str) -> str:
+    
     """
     Get real-time stock price for Indian (NSE/BSE) or global stocks.
     Uses Yahoo Finance with Alpha Vantage failover.
@@ -155,7 +155,8 @@ def get_stock_price(symbol: str) -> str:
         # Failover to Alpha Vantage
         logger.warning(f"Yahoo Finance failed for {symbol}: {e}. Trying Alpha Vantage...")
         return _alpha_vantage_price_fallback(symbol)
-
+    
+get_stock_price = tool(fetch_stock_price)
 
 def _alpha_vantage_price_fallback(symbol: str) -> str:
     """Alpha Vantage fallback for stock price."""
