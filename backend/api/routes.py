@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 import pandas as pd
 import numpy as np
-from finance.portfolio_optimizer import PortfolioOptimizer
+from backend.finance.portfolio_optimizer import PortfolioOptimizer
 
 router = APIRouter()
 

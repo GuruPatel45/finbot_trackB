@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from finance.portfolio_optimizer import PortfolioOptimizer
+from backend.finance.portfolio_optimizer import PortfolioOptimizer
 
 def test_optimizer_weights_sum_to_one():
     returns = pd.DataFrame(np.random.randn(100, 3) / 100)
