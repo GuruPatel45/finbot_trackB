@@ -44,8 +44,8 @@ from langgraph.graph import StateGraph, START, END
 from langgraph.graph.message import add_messages
 import pytz
 
-from tools.financial_tools import ALL_TOOLS
-from tools.sentiment_tools import SENTIMENT_TOOLS
+from backend.tools.financial_tools import ALL_TOOLS
+from backend.tools.sentiment_tools import SENTIMENT_TOOLS
 from config import settings, indian_market
 
 logger = logging.getLogger(__name__)

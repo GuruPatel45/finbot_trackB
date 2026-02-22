@@ -20,7 +20,7 @@ import requests
 from langchain_core.tools import tool
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
-from database.cache import cache_get, cache_set
+from backend.database.cache import cache_get, cache_set
 from config import settings
 
 logger = logging.getLogger(__name__)

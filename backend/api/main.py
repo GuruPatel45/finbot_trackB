@@ -26,8 +26,8 @@ from pydantic import BaseModel, field_validator
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from config import settings
-from database.models import create_db_engine, init_db, get_session_factory, Portfolio, Holding, Watchlist, Alert, ResearchQuery
-from database.cache import init_redis, cache_get, cache_set, get_cache_status
+from backend.database.models import create_db_engine, init_db, get_session_factory, Portfolio, Holding, Watchlist, Alert, ResearchQuery
+from backend.database.cache import init_redis, cache_get, cache_set, get_cache_status
 
 logger = logging.getLogger(__name__)
 
@@ -200,7 +200,7 @@ async def chat(request: ChatRequest, db: AsyncSession = Depends(get_db)):
     Main chat endpoint. Routes through LangGraph multi-node workflow.
     Returns structured response with nodes visited and tools used.
     """
-    from agents.langgraph_agent import get_agent
+    from backend.agents.langgraph_agent import get_agent
     agent = get_agent()
 
     result = await asyncio.get_event_loop().run_in_executor(
@@ -237,7 +237,7 @@ async def chat_stream(query: str, session_id: str = "default"):
     async def event_generator():
         yield f"data: {json.dumps({'type': 'start', 'message': 'Processing...'})}\n\n"
 
-        from agents.langgraph_agent import get_agent
+        from backend.agents.langgraph_agent import get_agent
         agent = get_agent()
 
         # Stream classify step
@@ -268,7 +268,7 @@ async def chat_stream(query: str, session_id: str = "default"):
 async def get_stock(symbol: str, period: str = "6mo"):
     """Get stock price + technical indicators."""
     import json as _json
-    from tools.financial_tools import get_stock_price, get_technical_indicators
+    from backend.tools.financial_tools import get_stock_price, get_technical_indicators
 
     price = _json.loads(await asyncio.get_event_loop().run_in_executor(
         None, get_stock_price.invoke, symbol))
@@ -282,7 +282,7 @@ async def get_stock(symbol: str, period: str = "6mo"):
 async def get_fundamentals(symbol: str):
     """Get fundamental analysis for a stock."""
     import json as _json
-    from tools.financial_tools import get_fundamental_analysis
+    from backend.tools.financial_tools import get_fundamental_analysis
     result = _json.loads(await asyncio.get_event_loop().run_in_executor(
         None, get_fundamental_analysis.invoke, symbol))
     return result
@@ -292,7 +292,7 @@ async def get_fundamentals(symbol: str):
 async def get_sector(sector: str):
     """Get sector comparison."""
     import json as _json
-    from tools.financial_tools import compare_sector
+    from backend.tools.financial_tools import compare_sector
     result = _json.loads(await asyncio.get_event_loop().run_in_executor(
         None, compare_sector.invoke, sector))
     return result
@@ -302,7 +302,7 @@ async def get_sector(sector: str):
 async def watchlist_prices(symbols: str = "RELIANCE.NS,TCS.NS,HDFCBANK.NS"):
     """Batch price fetch for watchlist (used by WebSocket updates)."""
     import json as _json
-    from tools.financial_tools import get_stock_price
+    from backend.tools.financial_tools import get_stock_price
 
     sym_list = [s.strip() for s in symbols.split(",")]
     prices = {}
@@ -325,7 +325,7 @@ async def get_portfolio(portfolio_id: int = 1, db: AsyncSession = Depends(get_db
     """Get portfolio with live prices and P&L."""
     from sqlalchemy import select
     import json as _json
-    from tools.financial_tools import get_stock_price
+    from backend.tools.financial_tools import get_stock_price
 
     result = await db.execute(select(Portfolio).where(Portfolio.id == portfolio_id))
     portfolio = result.scalar_one_or_none()
@@ -462,7 +462,7 @@ async def websocket_prices(websocket: WebSocket):
 
             # Send price update
             import json as _json
-            from tools.financial_tools import get_stock_price
+            from backend.tools.financial_tools import get_stock_price
             prices = {}
             for sym in symbols:
                 try:

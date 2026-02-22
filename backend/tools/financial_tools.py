@@ -29,7 +29,7 @@ import pandas as pd
 import numpy as np
 from langchain_core.tools import tool
 
-from database.cache import cache_get, cache_set
+from backend.database.cache import cache_get, cache_set
 from config import settings, indian_market
 
 logger = logging.getLogger(__name__)
