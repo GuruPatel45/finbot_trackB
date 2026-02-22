@@ -1,5 +1,5 @@
 import pytest
-from financial_tools import get_stock_price
+from backend.tools.financial_tools import get_stock_price
 
 @pytest.mark.asyncio
 async def test_stock_price_returns_data():
