@@ -1,0 +1,4 @@
+[flake8]
+max-line-length = 120
+ignore = E501, W291
+exclude = node_modules, venv, __pycache__
